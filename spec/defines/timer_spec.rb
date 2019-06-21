@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe 'systemd::timer' do
+describe 'systemd_file::timer' do
   let(:pre_condition) do
-    "include '::systemd'"
+    "include '::systemd_file'"
   end
   on_supported_os.each do |os, facts|
     context "on #{os}" do

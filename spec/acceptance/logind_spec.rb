@@ -13,7 +13,7 @@ describe 'systemd class' do
 
       class { 'systemd': }
 
-      class { 'systemd::logind': }
+      class { 'systemd_file::logind': }
 
       EOF
 

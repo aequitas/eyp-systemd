@@ -1,4 +1,4 @@
-class systemd::logind(
+class systemd_file::logind(
                         $handle_hibernate_key            = 'hibernate',
                         $handle_lid_switch               = 'suspend',
                         $handle_lid_switch_docked        = 'ignore',

@@ -13,7 +13,7 @@ describe 'systemd timer type' do
 
       class { 'systemd': }
 
-      systemd::target { 'demotarget':
+      systemd_file::target { 'demotarget':
         description => 'demo target acceptance',
       }
 

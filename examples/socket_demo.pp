@@ -1,6 +1,6 @@
 class { 'systemd': }
 
-systemd::socket { 'vago':
+systemd_file::socket { 'vago':
   description   => 'vago Server Activation Socket',
   listen_stream => [ '6565' ],
   wantedby      => [ 'sockets.target' ],
@@ -9,7 +9,7 @@ systemd::socket { 'vago':
 }
 
 
-systemd::service { 'vago@':
+systemd_file::service { 'vago@':
   description    => 'vago server',
   requires       => [ 'vago.socket' ],
   execstart      => [ '/bin/sleep 30' ],

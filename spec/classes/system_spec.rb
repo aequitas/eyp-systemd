@@ -1,10 +1,10 @@
 require 'spec_helper'
-describe 'systemd::system' do
+describe 'systemd_file::system' do
   on_supported_os.each do |os, facts|
     context "on #{os}" do
       let(:facts) { facts }
       context 'with defaults for all parameters' do
-        it { should contain_class('systemd::system') }
+        it { should contain_class('systemd_file::system') }
         it do
           should contain_file('/etc/systemd/system.conf')
             .with_content(/CPUAffinity=1 2/)

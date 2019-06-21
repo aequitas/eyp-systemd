@@ -12,7 +12,7 @@
 # [Install]
 # WantedBy=multi-user.target
 #
-define systemd::mount(
+define systemd_file::mount(
                         $what,
                         $where            = $name,
                         $type             = undef,
@@ -39,11 +39,11 @@ define systemd::mount(
                       ) {
   if versioncmp($::puppetversion, '4.0.0') >= 0
   {
-    contain ::systemd
+    contain ::systemd_file
   }
   else
   {
-    include ::systemd
+    include ::systemd_file
   }
 
   $mount_name = regsubst(regsubst($where, '/', '-', 'G'), '^-', '', '')

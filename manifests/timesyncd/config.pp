@@ -1,4 +1,4 @@
-class systemd::timesyncd::config inherits systemd::timesyncd {
+class systemd_file::timesyncd::config inherits systemd_file::timesyncd {
 
   file { '/etc/systemd/timesyncd.conf':
     ensure  => 'present',

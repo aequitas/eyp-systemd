@@ -15,26 +15,26 @@ describe 'systemd class' do
 
       # test
 
-      systemd::service { 'test':
+      systemd_file::service { 'test':
         execstart => '/bin/sleep 60',
         before    => Service['test'],
       }
 
       service { 'test':
         ensure  => 'running',
-        require => Class['::systemd'],
+        require => Class['::systemd_file'],
       }
 
       # test 2
 
-      systemd::service { 'test2':
+      systemd_file::service { 'test2':
         execstart => '/bin/sleep 120',
         before    => Service['test2'],
       }
 
       service { 'test2':
         ensure  => 'running',
-        require => Class['::systemd'],
+        require => Class['::systemd_file'],
       }
 
       EOF

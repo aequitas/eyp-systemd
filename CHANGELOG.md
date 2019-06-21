@@ -2,11 +2,11 @@
 
 ## 0.2.8
 
-* added define for mounts: **systemd::mount**
+* added define for mounts: **systemd_file::mount**
 
 ## 0.2.7
 
-* configurable restart for **systemd::sysvwrapper**
+* configurable restart for **systemd_file::sysvwrapper**
 
 ## 0.2.6
 
@@ -31,8 +31,8 @@
 
 ## 0.2.1
 
-* added **StandardInput** to **systemd::service** and **systemd::service::dropin**
-* added variables to **systemd::socket**:
+* added **StandardInput** to **systemd_file::service** and **systemd_file::service::dropin**
+* added variables to **systemd_file::socket**:
   - ListenDatagram
   - Accept
 * added managed variables to defines:
@@ -46,9 +46,9 @@
 ## 0.2.0
 
 * Added **puppetlabs/concat** as a dependency
-* Added **systemd::target** support - thanks to [ArVincentr](https://github.com/ArVincentr) for this [PR-126](https://github.com/NTTCom-MS/eyp-systemd/pull/126) partially fixing [issue 123](https://github.com/NTTCom-MS/eyp-systemd/issues/123)
+* Added **systemd_file::target** support - thanks to [ArVincentr](https://github.com/ArVincentr) for this [PR-126](https://github.com/NTTCom-MS/eyp-systemd/pull/126) partially fixing [issue 123](https://github.com/NTTCom-MS/eyp-systemd/issues/123)
 * **INCOMPATIBLE CHANGES**: safer defaults for:
-  - **systemd::timesyncd**: root_distance_max_sec, poll_interval_min_sec and poll_interval_max_sec changed to undef by default
+  - **systemd_file::timesyncd**: root_distance_max_sec, poll_interval_min_sec and poll_interval_max_sec changed to undef by default
   - **logind** is no longer managed by default
   - syslog related settings not set by default on **system::service**
 
@@ -63,7 +63,7 @@
 
 ## 0.1.49
 
-* Quick reference for **systemd::timer** - thanks to [towo](https://github.com/towo) for this [PR-119](https://github.com/NTTCom-MS/eyp-systemd/pull/119)
+* Quick reference for **systemd_file::timer** - thanks to [towo](https://github.com/towo) for this [PR-119](https://github.com/NTTCom-MS/eyp-systemd/pull/119)
 * Add **TasksMax** parameter for service units - thanks to [v4ld3r5](https://github.com/v4ld3r5) for this [PR-117](https://github.com/NTTCom-MS/eyp-systemd/pull/117)
 
 ## 0.1.48
@@ -86,12 +86,12 @@
 
 ## 0.1.44
 
-* added timesyncd support via class **systemd::timesyncd**
+* added timesyncd support via class **systemd_file::timesyncd**
 
 ## 0.1.43
 
 * added Ubuntu 18.04 support
-* added revolved support via class **systemd::resolved**
+* added revolved support via class **systemd_file::resolved**
 
 ## 0.1.42
 
@@ -100,15 +100,15 @@
 ## 0.1.41
 
 * changed default setting **kill_user_processes** to false, it was breaking compatibility on some systems
-* renamed **alias** to **service_alias** in **systemd::service** and **systemd::service::dropin**
+* renamed **alias** to **service_alias** in **systemd_file::service** and **systemd_file::service::dropin**
 
 ## 0.1.40
 
-* added **Alias**, **Also** and **DefaultInstance** for **systemd::service** and **systemd::service::dropin**
+* added **Alias**, **Also** and **DefaultInstance** for **systemd_file::service** and **systemd_file::service::dropin**
 
 ## 0.1.39
 
-* logind.conf is now managed via **systemd::logind** with a lot of new options - thanks to [cedef](https://github.com/cedef) for this [PR-59](https://github.com/NTTCom-MS/eyp-systemd/pull/59), it have been marged with some changes using [PR-81](https://github.com/NTTCom-MS/eyp-systemd/pull/81)
+* logind.conf is now managed via **systemd_file::logind** with a lot of new options - thanks to [cedef](https://github.com/cedef) for this [PR-59](https://github.com/NTTCom-MS/eyp-systemd/pull/59), it have been marged with some changes using [PR-81](https://github.com/NTTCom-MS/eyp-systemd/pull/81)
 
 ## 0.1.38
 
@@ -117,60 +117,60 @@
 
 ## 0.1.37
 
-* Modified **systemd::service::dropin** to allow multiple drop in files per service as suggested in [Issue 49](https://github.com/NTTCom-MS/eyp-systemd/issues/49) by [cedef](https://github.com/cedef)
+* Modified **systemd_file::service::dropin** to allow multiple drop in files per service as suggested in [Issue 49](https://github.com/NTTCom-MS/eyp-systemd/issues/49) by [cedef](https://github.com/cedef)
 
 ## 0.1.36
 
-* added ability to **systemd::service** to use OnFailure - thanks to [TuningYourCode](https://github.com/TuningYourCode) for this [PR-65](https://github.com/NTTCom-MS/eyp-systemd/pull/65)
-* Added SuccessExitStatus and KillSignal to **systemd::service** - thanks to [alquez](https://github.com/alquez) for this [PR-63](https://github.com/NTTCom-MS/eyp-systemd/pull/63)
+* added ability to **systemd_file::service** to use OnFailure - thanks to [TuningYourCode](https://github.com/TuningYourCode) for this [PR-65](https://github.com/NTTCom-MS/eyp-systemd/pull/65)
+* Added SuccessExitStatus and KillSignal to **systemd_file::service** - thanks to [alquez](https://github.com/alquez) for this [PR-63](https://github.com/NTTCom-MS/eyp-systemd/pull/63)
 * added support for Debian 9 - thanks to [cedef](https://github.com/cedef) for this [PR-60](https://github.com/NTTCom-MS/eyp-systemd/pull/60)
-* modified service template to be able to be used in **systemd::service::dropin**
+* modified service template to be able to be used in **systemd_file::service::dropin**
 * [Issue 55](https://github.com/NTTCom-MS/eyp-systemd/issues/55) Restart default value conflicts with oneshot services, changed default value to **undef**
 * [Issue 54](https://github.com/NTTCom-MS/eyp-systemd/issues/54) Added exec *systemctl daemon-reload* because *systemctl reload* is a valid command and it may be confusing. *systemctl reload* will be removed in the **0.2.0** release
 
 ## 0.1.35
 
-* execstart for **systemd::service** is no longer mandatory
-* added dropinfile support using **systemd::service::dropin** - thanks to [oOHenry](https://github.com/oOHenry) for this [PR-57](https://github.com/NTTCom-MS/eyp-systemd/pull/57)
+* execstart for **systemd_file::service** is no longer mandatory
+* added dropinfile support using **systemd_file::service::dropin** - thanks to [oOHenry](https://github.com/oOHenry) for this [PR-57](https://github.com/NTTCom-MS/eyp-systemd/pull/57)
 
 ## 0.1.34
 
 * for puppet4, changed include for contain as suggested by [steveniemitz](https://github.com/NTTCom-MS/eyp-systemd/issues/35)
-* **systemd::timer** camelcase + nil values - thanks to [cedef](https://github.com/cedef) for this [PR-47](https://github.com/NTTCom-MS/eyp-systemd/pull/47)
+* **systemd_file::timer** camelcase + nil values - thanks to [cedef](https://github.com/cedef) for this [PR-47](https://github.com/NTTCom-MS/eyp-systemd/pull/47)
 * added Rubocop to enhance ruby files code quality - thanks to [cedef](https://github.com/cedef) for this [PR-48](https://github.com/NTTCom-MS/eyp-systemd/pull/48)
 
 ## 0.1.33
 
-* added **wait_time_on_startup** to **systemd::sysvwrapper**
+* added **wait_time_on_startup** to **systemd_file::sysvwrapper**
 
 ## 0.1.32
 
-* added include to **systemd::sysvwrapper**
+* added include to **systemd_file::sysvwrapper**
 
 ## 0.1.31
 
-* make **systemd::sysvwrapper** more generic allowing init scripts outside /etc/init.d
+* make **systemd_file::sysvwrapper** more generic allowing init scripts outside /etc/init.d
 
 ## 0.1.30
 
 * added ArchLinux support
-* added **systemd::timer** - thanks to [func0der](https://github.com/func0der) for this [PR-44](https://github.com/NTTCom-MS/eyp-systemd/pull/44), merged with some changes in [PR-46](https://github.com/NTTCom-MS/eyp-systemd/pull/46)
+* added **systemd_file::timer** - thanks to [func0der](https://github.com/func0der) for this [PR-44](https://github.com/NTTCom-MS/eyp-systemd/pull/44), merged with some changes in [PR-46](https://github.com/NTTCom-MS/eyp-systemd/pull/46)
 
 ## 0.1.29
 
-* added **description** to **systemd::socket**
+* added **description** to **systemd_file::socket**
 
 ## 0.1.28
 
-* added KillMode to **systemd::service**
+* added KillMode to **systemd_file::service**
 
 ## 0.1.27
 
-* added standard_error and standard_output variables to **systemd::service** (default to syslog, keeping compatibility)
+* added standard_error and standard_output variables to **systemd_file::service** (default to syslog, keeping compatibility)
 
 ## 0.1.26
 
-* added ExecStartPost options to **systemd::service**
+* added ExecStartPost options to **systemd_file::service**
 * allow multiple commands for **ExecStart** and **ExecStop** (based on [PR-32](https://github.com/NTTCom-MS/eyp-systemd/pull/32))
 
 ## 0.1.25
@@ -188,7 +188,7 @@
 
 ## 0.1.22
 
-* added to **systemd::service**
+* added to **systemd_file::service**
   * environment_files - thanks to [oOHenry](https://github.com/oOHenry) for this PR
   * umask
   * nice
@@ -197,13 +197,13 @@
 ## 0.1.21
 
 * added SLES12 support
-* added to **systemd::service**:
+* added to **systemd_file::service**:
   * working_directory
   * root_directory
 
 ## 0.1.20
 
-* added to **systemd::service**:
+* added to **systemd_file::service**:
   * restart_sec
   * private_tmp
   * limit_nproc
@@ -258,7 +258,7 @@
 
 ## 0.1.11
 
-*  pidfile for systemd::service
+*  pidfile for systemd_file::service
 
 ## 0.1.10
 

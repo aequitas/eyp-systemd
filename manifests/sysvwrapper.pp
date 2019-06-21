@@ -1,4 +1,4 @@
-define systemd::sysvwrapper (
+define systemd_file::sysvwrapper (
                               $initscript,
                               $servicename          = $name,
                               $check_time           = '10m',
@@ -8,11 +8,11 @@ define systemd::sysvwrapper (
 
   if versioncmp($::puppetversion, '4.0.0') >= 0
   {
-    contain ::systemd
+    contain ::systemd_file
   }
   else
   {
-    include ::systemd
+    include ::systemd_file
   }
 
   file { "${initscript}.sysvwrapper.status":
@@ -31,7 +31,7 @@ define systemd::sysvwrapper (
     content => template("${module_name}/sysv/wrapper.erb"),
   }
 
-  systemd::service { $servicename:
+  systemd_file::service { $servicename:
     execstart => "/bin/bash ${initscript}.sysvwrapper.wrapper start",
     execstop  => "/bin/bash ${initscript}.sysvwrapper.wrapper stop",
     require   => File[ [

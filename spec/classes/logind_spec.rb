@@ -1,10 +1,10 @@
 require 'spec_helper'
-describe 'systemd::logind' do
+describe 'systemd_file::logind' do
   on_supported_os.each do |os, facts|
     context "on #{os}" do
       let(:facts) { facts }
       context 'with defaults for all parameters' do
-        it { should contain_class('systemd::logind') }
+        it { should contain_class('systemd_file::logind') }
         it do
           should contain_file('/etc/systemd/logind.conf')
             .with_content(/KillExcludeUsers=root/)

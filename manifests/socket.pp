@@ -6,7 +6,7 @@
 #
 # [Install]
 # WantedBy=sockets.target
-define systemd::socket(
+define systemd_file::socket(
                         $listen_stream    = undef,
                         $listen_datagram  = undef,
                         $socket_name      = $name,
@@ -33,11 +33,11 @@ define systemd::socket(
                       ) {
   if versioncmp($::puppetversion, '4.0.0') >= 0
   {
-    contain ::systemd
+    contain ::systemd_file
   }
   else
   {
-    include ::systemd
+    include ::systemd_file
   }
 
   concat { "/etc/systemd/system/${socket_name}.socket":

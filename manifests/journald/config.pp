@@ -1,4 +1,4 @@
-class systemd::journald::config inherits systemd::journald {
+class systemd_file::journald::config inherits systemd_file::journald {
 
   Exec {
     path => '/bin:/sbin:/usr/bin:/usr/sbin',
@@ -12,7 +12,7 @@ class systemd::journald::config inherits systemd::journald {
     content => template("${module_name}/journald.erb"),
   }
 
-  if($systemd::journald::seal)
+  if($systemd_file::journald::seal)
   {
     # TODO: FSS interval
     # chmod 2755 /var/log/journal/

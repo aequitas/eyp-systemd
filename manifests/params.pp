@@ -1,4 +1,4 @@
-class systemd::params {
+class systemd_file::params {
 
   case $::osfamily
   {

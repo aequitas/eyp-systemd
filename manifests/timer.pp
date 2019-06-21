@@ -1,4 +1,4 @@
-define systemd::timer (
+define systemd_file::timer (
                         $timer_name           = $name,
                         $on_active_sec        = undef,
                         $on_boot_sec          = undef,

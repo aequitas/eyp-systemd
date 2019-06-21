@@ -1,4 +1,4 @@
-class systemd::system(
+class systemd_file::system(
                         $cpu_affinity                     = undef,
                         $capability_bounding_set          = undef,
                         $crash_change_vt                  = undef,

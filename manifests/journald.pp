@@ -1,4 +1,4 @@
-class systemd::journald (
+class systemd_file::journald (
                           $manage_service         = true,
                           $manage_docker_service  = true,
                           $service_ensure         = 'running',
@@ -28,7 +28,7 @@ class systemd::journald (
                           $system_max_file_size   = undef,
                           $system_max_use         = undef,
                           $tty_path               = '/dev/console'
-                        ) inherits systemd::params {
+                        ) inherits systemd_file::params {
 
   # validate_bool($forward_to_console, $forward_to_kmsg,
   #               $forward_to_syslog, $forward_to_wall, $seal)
@@ -50,7 +50,7 @@ class systemd::journald (
   # validate_re($max_level_wall, ['^emerg$', '^alert$', '^crit$', '^err$',
   #   '^warning$', '^notice$', '^info$', '^debug$'])
 
-  class { '::systemd::journald::config': } ~>
-  class { '::systemd::journald::service': } ->
-  Class['::systemd::journald']
+  class { '::systemd_file::journald::config': }
+  ~> class { '::systemd_file::journald::service': }
+  -> Class['::systemd_file::journald']
 }

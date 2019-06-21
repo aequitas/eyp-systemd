@@ -1,4 +1,4 @@
-class systemd::resolved::config inherits systemd::resolved {
+class systemd_file::resolved::config inherits systemd_file::resolved {
 
   Exec {
     path => '/bin:/sbin:/usr/bin:/usr/sbin',

@@ -1,4 +1,4 @@
-define systemd::target(
+define systemd_file::target(
                         $target_name   = $name,
                         # unit
                         $description   = undef,
@@ -14,7 +14,7 @@ define systemd::target(
                         $partof        = undef,
                         $allow_isolate = undef,
                       ) {
-  include ::systemd
+  include ::systemd_file
 
   concat { "/etc/systemd/system/${target_name}.target":
     ensure => 'present',

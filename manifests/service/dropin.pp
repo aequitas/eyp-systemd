@@ -1,4 +1,4 @@
-define systemd::service::dropin (
+define systemd_file::service::dropin (
                                   $dropin_order                = '99',
                                   $dropin_name                 = 'override',
                                   $purge_dropin_dir            = true,
@@ -77,11 +77,11 @@ define systemd::service::dropin (
 
   if versioncmp($::puppetversion, '4.0.0') >= 0
   {
-    contain ::systemd
+    contain ::systemd_file
   }
   else
   {
-    include ::systemd
+    include ::systemd_file
   }
 
   $dropin = true

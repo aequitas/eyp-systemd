@@ -1,5 +1,7 @@
 # systemd
 
+This is a fork with the module name renamed from `systemd` to `systemd_file` to not conflict with camptocamp-systemd. As this module only manages the file content at a higher level and not the units themselves.
+
 #### Table of Contents
 
 1. [Overview](#overview)
@@ -57,7 +59,7 @@ You can also find some puppet code on the examples folder with some configuratio
 #### Systemd Service
 
 ```puppet
-systemd::service { 'simpledemo':
+systemd_file::service { 'simpledemo':
   execstart => "/usr/bin/simpledemo",
 }
 ```
@@ -84,7 +86,7 @@ WantedBy=multi-user.target
 
 #### Service overrides(dropin):
 ```puppet
-systemd::service::dropin { 'ceph-disk@':
+systemd_file::service::dropin { 'ceph-disk@':
   env_vars => ['CEPH_DISK_TIMEOUT=3000'],
 }
 ```
@@ -102,7 +104,7 @@ Please be aware this module defaults (documented in the [reference](#reference) 
 #### Setup specific systemd manager directives
 
 ```puppet
-class { 'systemd::system':
+class { 'systemd_file::system':
   runtime_watchdog_sec  => '40',
   shutdown_watchdog_sec => '2min',
 }
@@ -115,7 +117,7 @@ class { 'systemd::system':
 Dependencies between systemd services using systemd directives like **after** in the following example:
 
 ```puppet
-systemd::service { 'oracleasm':
+systemd_file::service { 'oracleasm':
   description       => 'Load oracleasm Modules',
   after             => 'iscsi.service',
   type              => 'oneshot',
@@ -129,7 +131,7 @@ systemd::service { 'oracleasm':
 Add environments variables using **env_vars**:
 
 ```puppet
-systemd::service { 'tomcat7':
+systemd_file::service { 'tomcat7':
   user        => 'tomcat',
   group       => 'tomcat',
   execstart   => '/apps/tomcat/bin/startup.sh',
@@ -154,7 +156,7 @@ file { "/etc/init.d/dockercontainer_${container_id}":
   content => file("${module_name}/container_init.sh"),
 }
 
-systemd::sysvwrapper { "dockercontainer_${container_id}":
+systemd_file::sysvwrapper { "dockercontainer_${container_id}":
   initscript => "/etc/init.d/dockercontainer_${container_id}",
   notify     => Service["dockercontainer_${container_id}"],
   before     => Service["dockercontainer_${container_id}"],
@@ -230,7 +232,7 @@ root      7173  0.0  0.0 107896   608 ?        S    10:34   0:00  \_ sleep 10m
 ### Systemd Service Overrides:
 
 ```puppet
-systemd::service::dropin { 'node_exporter':
+systemd_file::service::dropin { 'node_exporter':
   user    => 'monitoring',
   restart => 'on-failure',
 }
@@ -253,7 +255,7 @@ User=monitoring
 
 Base class for refreshing systemd on demand
 
-#### systemd::timesyncd
+#### systemd_file::timesyncd
 
 * **manage_service**:        (default: true)
 * **manage_docker_service**: (default: true)
@@ -265,7 +267,7 @@ Base class for refreshing systemd on demand
 * **poll_interval_min_sec**: (default: 32)
 * **poll_interval_max_sec**: (default: 2048)
 
-#### systemd::resolved
+#### systemd_file::resolved
 
 * **manage_service**:        (default: true)
 * **manage_docker_service**: (default: true)
@@ -277,7 +279,7 @@ Base class for refreshing systemd on demand
 * **dnssec**:                (default: false)
 * **cache**:                 (default: true)
 
-#### systemd::logind
+#### systemd_file::logind
 
 /etc/systemd/logind.conf management:
 
@@ -305,7 +307,7 @@ Base class for refreshing systemd on demand
 * **suspend_key_ignore_inhibited**:    (default: false)
 * **user_tasks_max**:                  (default: 33%')
 
-#### systemd::journald
+#### systemd_file::journald
 
 systemd-journald is a system service that collects and stores logging data
 
@@ -337,7 +339,7 @@ systemd-journald is a system service that collects and stores logging data
 
 ### defines
 
-#### systemd::mount
+#### systemd_file::mount
 
 * **what**: Takes an absolute path of a device node, file or other resource to mount. See mount(8) for details. If this refers to a device node, a dependency on the respective device unit is automatically created. (See systemd.device(5) for more information.) This option is mandatory.
 * **where**: Takes an absolute path of a directory for the mount point; in particular, the destination cannot be a symbolic link. If the mount point does not exist at the time of mounting, it is created. This string must be reflected in the unit filename. (See above.) This option is mandatory. (default: resource's name)
@@ -345,7 +347,7 @@ systemd-journald is a system service that collects and stores logging data
 * **options**: Mount options to use when mounting. This takes a comma-separated list of options. This setting is optional. Note that the usual specifier expansion is applied to this setting, literal percent characters should hence be written as "%%".
 (...)
 
-#### systemd::service
+#### systemd_file::service
 
 * **execstart**: command to start daemon (default: undef)
 * **execstop**: command to stop daemon (default: undef)
@@ -395,14 +397,14 @@ systemd-journald is a system service that collects and stores logging data
 * **tasksmax**: Specify the maximum number of tasks that may be created in the unit. (default: undef)
 * **partof**: Specify if service has dependency. Similar to Requires= When systemd stops or restarts the units listed here, the action is propagated to this unit.
 
-#### systemd::service::dropin
+#### systemd_file::service::dropin
 
-Has the same options as **systemd::service** plus the following options for the dropin itself management:
+Has the same options as **systemd_file::service** plus the following options for the dropin itself management:
 * **dropin_order**: dropin priority - part of the filename, only useful for multiple dropin files (default: 99)
 * **dropin_name**: dropin name (default: override)
 * **purge_dropin_dir**: Flag to purge not managed dropins (default: true)
 
-#### systemd::sysvwrapper
+#### systemd_file::sysvwrapper
 
 system-v compatibility
 
@@ -410,7 +412,7 @@ system-v compatibility
 * **servicename**: service name (default: resource's name)
 * **check_time**: check interval -time between **initscript** status checks- (default: 10m)
 
-#### systemd::timer
+#### systemd_file::timer
 
 For a detailed explanation of all the timer settings, remember to read `systemd.timer(5)` for the full documentation.
 
@@ -427,13 +429,13 @@ For a detailed explanation of all the timer settings, remember to read `systemd.
 * **wantedby**: List of units that *want* this unit in systemd terminolagy. (default: `[]`)
 * **wantedby**: List of units that *require* this unit in systemd terminolagy. (default: `[]`)
 
-#### systemd::target
+#### systemd_file::target
 
 * **description**: A meaningful description of the unit. This text is displayed for example in the output of the systemctl status command (default: undef)
 * **targetname**: Used to create the target file under /etc/systemd/system/ needs to be the same name as instantiated services referenced by partof (default: undef)
 * **allow_isolate**: this unit may be used with the systemctl isolate command. Otherwise, this will be refused  (default:undef)
 
-#### systemd::socket
+#### systemd_file::socket
 
 * **listen_stream**: (default: undef)
 * **listen_datagram**: (default: undef)
