@@ -52,7 +52,7 @@ class systemd_file::params {
             /^[89].*$/:
             {
             }
-            /^10.*$/:
+            /^1[012].*$/:
             {
             }
             default: { fail("Unsupported Debian version! - ${::operatingsystemrelease}")  }
